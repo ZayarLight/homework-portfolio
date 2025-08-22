@@ -1,0 +1,23 @@
+<h2>Measurement Converter</h2>
+<label for="inch">Enter Inch:</label>
+<input type="number" id="inch" value="" min="0">
+<button onclick="convert()">Submit</button>
+<p id="result-inches"></p>
+<button onclick="resetInch()">Back</button>
+
+<script>
+  function convert() {
+    let inch = parseFloat(document.getElementById("inch").value);
+    if (isNaN(inch) || inch < 0) {
+      document.getElementById("result-inches").innerHTML = "Please enter a valid positive number.";
+      return;
+    }
+    let cm = inch * 2.54;
+    document.getElementById("result-inches").innerHTML = `Equal to ${cm.toFixed(2)} cm`;
+  }
+
+  function resetInch() {
+    document.getElementById("inch").value = "";
+    document.getElementById("result-inches").innerHTML = "";
+  }
+</script>

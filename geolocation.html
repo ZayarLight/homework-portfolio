@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Distance to Kasem Bundit University</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Kasem Bundit University Distance Checker</h1>
+  <button onclick="getLocation()">Where am I?</button>
+  <div id="result"></div>
+
+  <script>
+    // Coordinates of Kasem Bundit University (Main Campus)
+    const kasemLat = 13.7475;
+    const kasemLon = 100.3256;
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showDistance, showError);
+      } else {
+        document.getElementById("result").innerText = "Geolocation is not supported by your browser.";
+      }
+    }
+
+    function showDistance(position) {
+      const userLat = position.coords.latitude;
+      const userLon = position.coords.longitude;
+
+      const distance = calculateDistance(userLat, userLon, kasemLat, kasemLon);
+      document.getElementById("result").innerText =
+        `You're ${distance.toFixed(2)} km away from the Kasem Bundit University.`;
+    }
+
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Radius of Earth in km
+      const dLat = toRad(lat2 - lat1);
+      const dLon = toRad(lon2 - lon1);
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+    }
+
+    function toRad(degrees) {
+      return degrees * (Math.PI / 180);
+    }
+
+    function showError(error) {
+      let message = "";
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          message = "Permission denied. Please allow location access.";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          message = "Location information is unavailable.";
+          break;
+        case error.TIMEOUT:
+          message = "The request to get your location timed out.";
+          break;
+        default:
+          message = "An unknown error occurred.";
+      }
+      document.getElementById("result").innerText = message;
+    }
+  </script>
+
+</body>
+</html>

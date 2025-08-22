@@ -1,0 +1,36 @@
+<h2>Calculate Grade</h2>
+<label for="score">Enter the Score:</label>
+<input type="number" id="score" value="" min="0" max="100">
+<button onclick="calculateGrade()">Submit</button>
+<p id="result-grade"></p>
+<button onclick="resetGrade()">Back</button>
+
+<script>
+  function calculateGrade() {
+    let score = parseFloat(document.getElementById("score").value);
+    if (isNaN(score) || score < 0 || score > 100) {
+      document.getElementById("result-grade").innerHTML = "Please enter a score between 0 and 100.";
+      return;
+    }
+
+    let grade = "";
+    if (score >= 90) {
+      grade = "A";
+    } else if (score >= 80) {
+      grade = "B";
+    } else if (score >= 70) {
+      grade = "C";
+    } else if (score >= 60) {
+      grade = "D";
+    } else {
+      grade = "F";
+    }
+
+    document.getElementById("result-grade").innerHTML = `You got "${grade}" grade.`;
+  }
+
+  function resetGrade() {
+    document.getElementById("score").value = "";
+    document.getElementById("result-grade").innerHTML = "";
+  }
+</script>
