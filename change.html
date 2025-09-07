@@ -2,8 +2,9 @@
 <label for="amount">Enter Amount:</label>
 <input type="number" id="amount" value="" min="1">
 <button onclick="calculateChange()">Submit</button>
+<button onclick="resetChange()">Reset</button>
+<button onclick="goBack()">Back</button>
 <p id="result-change"></p>
-<button onclick="resetChange()">Back</button>
 
 <script>
   function calculateChange() {
@@ -30,5 +31,14 @@
   function resetChange() {
     document.getElementById("amount").value = "";
     document.getElementById("result-change").innerHTML = "";
+  }
+
+  function goBack() {
+    // Option 1: Navigate to previous page
+    window.history.back();
+
+    // Option 2: Hide calculator or show another section
+    // document.getElementById("calculator-section").style.display = "none";
+    // document.getElementById("main-menu").style.display = "block";
   }
 </script>
