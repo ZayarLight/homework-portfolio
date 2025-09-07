@@ -2,8 +2,9 @@
 <label for="inch">Enter Inch:</label>
 <input type="number" id="inch" value="" min="0">
 <button onclick="convert()">Submit</button>
+<button onclick="resetInch()">Reset</button>
+<button onclick="goBack()">Back</button>
 <p id="result-inches"></p>
-<button onclick="resetInch()">Back</button>
 
 <script>
   function convert() {
@@ -19,5 +20,11 @@
   function resetInch() {
     document.getElementById("inch").value = "";
     document.getElementById("result-inches").innerHTML = "";
+  }
+
+  function goBack() {
+
+    window.history.back();
+
   }
 </script>
