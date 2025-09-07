@@ -13,6 +13,7 @@
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
+      margin: 5px;
     }
     #result {
       margin-top: 20px;
@@ -25,10 +26,11 @@
 
   <h1>Kasem Bundit University Distance Checker</h1>
   <button onclick="getLocation()">Where am I?</button>
+  <button onclick="resetResult()">Reset</button>
+  <button onclick="goBack()">Back</button>
   <div id="result"></div>
 
   <script>
-    // Coordinates of Kasem Bundit University (Main Campus)
     const kasemLat = 13.7475;
     const kasemLon = 100.3256;
 
@@ -43,14 +45,13 @@
     function showDistance(position) {
       const userLat = position.coords.latitude;
       const userLon = position.coords.longitude;
-
       const distance = calculateDistance(userLat, userLon, kasemLat, kasemLon);
       document.getElementById("result").innerText =
         `You're ${distance.toFixed(2)} km away from the Kasem Bundit University.`;
     }
 
     function calculateDistance(lat1, lon1, lat2, lon2) {
-      const R = 6371; // Radius of Earth in km
+      const R = 6371;
       const dLat = toRad(lat2 - lat1);
       const dLon = toRad(lon2 - lon1);
       const a =
@@ -81,6 +82,14 @@
           message = "An unknown error occurred.";
       }
       document.getElementById("result").innerText = message;
+    }
+
+    function resetResult() {
+      document.getElementById("result").innerText = "";
+    }
+
+    function goBack() {
+      window.history.back();
     }
   </script>
 
